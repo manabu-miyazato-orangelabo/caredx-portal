@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORANGE CareDX Portal | 株式会社 ORANGE LABO</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: {
+                            DEFAULT: '#FF8500',
+                            dark: '#D96B00',
+                            soft: '#FFF2E5',
+                            hover: '#E07400'
+                        },
+                        navy: {
+                            DEFAULT: '#1E3564',
+                            dark: '#0F1D38',
+                            light: '#2C498A',
+                            subtle: '#EBF0F8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', '"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .a4-paper {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 16mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+            box-sizing: border-box;
+            position: relative;
+            color: #0D0C0C;
+        }
+
+        @media (max-width: 850px) {
+            .a4-paper {
+                width: 100%;
+                min-height: auto;
+                padding: 12px;
+            }
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #F1F5F9; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-orange selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="bg-navy-dark text-white sticky top-0 z-50 shadow-md border-b-2 border-orange">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <img src="logo.png" alt="ORANGE LABO" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden w-10 h-10 rounded-xl bg-gradient-to-br from-orange to-orange-dark items-center justify-center text-white shadow-md font-black text-xl tracking-tighter">
+                    OL
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-2">
+                        <span>株式会社 ORANGE LABO</span>
+                    </h1>
+                    <p class="text-[10px] text-orange-soft font-bold tracking-wider uppercase">CareDX Portal 業務統合ポータル</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <a href="#workspace" class="text-xs sm:text-sm bg-orange hover:bg-orange-hover text-white px-3.5 py-2 rounded-lg font-bold shadow-md transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI業務ツール</span>
+                </a>
+                <button onclick="scrollToSection('links-section')" class="text-xs sm:text-sm bg-navy-light hover:bg-navy text-white px-3 py-2 rounded-lg font-medium transition flex items-center gap-1.5 hidden sm:flex">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>社内資料</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="relative bg-navy-dark text-white overflow-hidden border-b-4 border-orange">
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <img src="banner.jpg" alt="Banner Background" class="w-full h-full object-cover" onerror="this.style.display='none';">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 relative z-10">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange/20 border border-orange/40 text-orange-soft text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-orange animate-ping"></span>
+                    <span>ケアマネジャー業務統合プラットフォーム</span>
+                </div>
+                
+                <!-- Main Description Banner Text -->
+                <p class="text-lg sm:text-2xl font-bold text-white leading-relaxed drop-shadow-md">
+                    現場の記録作成、会議録要約、病院・通所向け基本情報作成、FAX送信、各種様式リンクまで。ケアマネジメント業務をAIとDXの力で強力にサポートします。
+                </p>
+
+                <div class="pt-2 flex flex-wrap gap-2 text-xs font-bold">
+                    <button onclick="scrollToSection('notice-section')" class="bg-navy hover:bg-navy-light text-slate-100 px-3 py-1.5 rounded-md border border-navy-light transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-bullhorn text-orange"></i> お知らせ・書類
+                    </button>
+                    <button onclick="scrollToSection('ai-tools-section')" class="bg-navy hover:bg-navy-light text-slate-100 px-3 py-1.5 rounded-md border border-navy-light transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-microchip text-orange"></i> AIサポート
+                    </button>
+                    <button onclick="openToolTab('tab-monitoring')" class="bg-orange/20 hover:bg-orange/30 text-orange-soft px-3 py-1.5 rounded-md border border-orange/40 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen-to-square"></i> モニタリングAI
+                    </button>
+                    <button onclick="openToolTab('tab-meeting')" class="bg-orange/20 hover:bg-orange/30 text-orange-soft px-3 py-1.5 rounded-md border border-orange/40 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-users"></i> 会議録AI
+                    </button>
+                    <button onclick="openToolTab('tab-facesheet')" class="bg-orange/20 hover:bg-orange/30 text-orange-soft px-3 py-1.5 rounded-md border border-orange/40 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-id-card"></i> 基本情報AI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Workspace -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- SECTION 1: お知らせ・FAX・SNS・社内書類 -->
+        <section id="notice-section" class="space-y-4">
+            <div class="border-l-4 border-orange pl-3 py-0.5 flex items-center justify-between">
+                <h3 class="text-xl font-bold text-navy-dark tracking-wide flex items-center gap-2">
+                    <i class="fa-solid fa-newspaper text-orange"></i>
+                    <span>お知らせ、FAX、SNS & 共有書類</span>
+                </h3>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- FAX Folder -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col items-center justify-between hover:border-orange transition group">
+                            <div class="w-14 h-14 rounded-2xl bg-navy-dark text-orange flex items-center justify-center text-2xl font-black shadow-md group-hover:scale-105 transition">
+                                O3+
+                            </div>
+                            <div class="my-3">
+                                <h4 class="font-bold text-navy-dark text-base">FAXフォルダ</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">受信メッセージ・記録照会</p>
+                            </div>
+                            <a href="https://o3plus.jp" target="_blank" class="w-full bg-navy hover:bg-navy-dark text-white py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5">
+                                <span>O3+ を開く</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Notice -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center flex flex-col items-center justify-between hover:border-orange transition group">
+                            <div class="w-14 h-14 rounded-2xl bg-orange text-white flex items-center justify-center text-2xl font-black shadow-md group-hover:scale-105 transition">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <div class="my-3">
+                                <h4 class="font-bold text-navy-dark text-base">研修・お知らせ</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">中部地区医師会・関係機関通知</p>
+                            </div>
+                            <button onclick="showToast('社内掲示板通知を表示中', 'info')" class="w-full bg-navy hover:bg-navy-dark text-white py-2 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5">
+                                <span>お知らせ一覧</span>
+                                <i class="fa-solid fa-list-check text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Social Icons Row -->
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-around">
+                        <a href="https://instagram.com" target="_blank" class="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-orange transition">
+                            <i class="fa-brands fa-instagram text-xl text-orange"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-navy transition">
+                            <i class="fa-brands fa-facebook text-xl text-navy"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://joint-kaigo.com" target="_blank" class="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-navy-dark transition">
+                            <span class="bg-navy-dark text-white text-[10px] font-black px-1.5 py-0.5 rounded">JOINT</span>
+                            <span>介護ニュース</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Box: Official Documents Links -->
+                <div id="links-section" class="lg:col-span-5 bg-navy-dark text-white p-6 rounded-2xl shadow-sm flex flex-col justify-between space-y-3">
+                    <h4 class="text-sm font-extrabold uppercase tracking-wider text-orange border-b border-navy-light pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-tree"></i>
+                        <span>社内共有ファイル・保険者様式</span>
+                    </h4>
+
+                    <div class="space-y-2.5">
+                        <a href="https://sites.google.com/orangelabo.com/orangelabo/%E5%90%84%E5%B8%82%E7%94%BA%E6%9D%91%E4%BF%9D%E9%99%BA%E8%80%85%E6%9B%B8%E9%A1%9E" target="_blank" class="w-full bg-navy hover:bg-navy-light border border-navy-light text-white p-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-between transition group shadow-sm">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-landmark text-orange"></i>
+                                <span>各市町村（保険者書類）</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-orange opacity-80 group-hover:translate-x-0.5 transition"></i>
+                        </a>
+
+                        <a href="https://sites.google.com/orangelabo.com/orangelabo/%E4%BE%BF%E5%88%A9%E6%9B%B8%E9%A1%9E" target="_blank" class="w-full bg-navy hover:bg-navy-light border border-navy-light text-white p-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-between transition group shadow-sm">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-file-shield text-orange"></i>
+                                <span>便利書類（各種様式）</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-orange opacity-80 group-hover:translate-x-0.5 transition"></i>
+                        </a>
+
+                        <a href="https://sites.google.com/orangelabo.com/orangelabo/%E9%87%8D%E8%A6%81%E4%BA%8B%E9%A0%85%E5%A5%91%E7%B4%84%E6%9B%B8%E5%B9%B4%E9%96%93%E8%A8%88%E7%94%BB" target="_blank" class="w-full bg-navy hover:bg-navy-light border border-navy-light text-white p-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-between transition group shadow-sm">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-file-contract text-orange"></i>
+                                <span>重要事項、契約書、年間計画</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-orange opacity-80 group-hover:translate-x-0.5 transition"></i>
+                        </a>
+
+                        <a href="https://sites.google.com/orangelabo.com/orangelabo/%E4%BA%8B%E6%A5%AD%E6%89%80%E5%BF%85%E8%A6%81%E6%9B%B8%E9%A1%9E" target="_blank" class="w-full bg-navy hover:bg-navy-light border border-navy-light text-white p-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-between transition group shadow-sm">
+                            <span class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-briefcase text-orange"></i>
+                                <span>事業所必要書類</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-orange opacity-80 group-hover:translate-x-0.5 transition"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AIサポート & クラウドツール -->
+        <section id="ai-tools-section" class="space-y-4">
+            <div class="border-l-4 border-orange pl-3 py-0.5">
+                <h3 class="text-xl font-bold text-navy-dark tracking-wide flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-orange"></i>
+                    <span>AIサポート & クラウドツール</span>
+                </h3>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+                <!-- Kaipoke Portal -->
+                <a href="https://r.kaipoke.biz/kaipokebiz/login/COM020102.do" target="_blank" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-orange transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-orange/10 text-orange flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <span class="text-xs font-bold text-navy-dark group-hover:text-orange transition">カイポケ</span>
+                </a>
+
+                <!-- AI Record Builder -->
+                <a href="https://keamaneai.com/rogin" target="_blank" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-orange transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-navy-subtle text-navy flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <span class="text-xs font-bold text-navy-dark group-hover:text-orange transition">AI記録ビルダー</span>
+                </a>
+
+                <!-- AI Care Management -->
+                <a href="https://www.aikeamane.com/" target="_blank" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:border-orange transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-navy-subtle text-navy flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="text-xs font-bold text-navy-dark group-hover:text-orange transition">AIケアマネジメント</span>
+                </a>
+
+                <!-- Gemini Monitoring -->
+                <button onclick="openToolTab('tab-monitoring')" class="bg-white p-4 rounded-xl border-2 border-orange/60 shadow-sm hover:border-orange transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-orange/20 text-orange flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-pen-to-square text-orange"></i>
+                    </div>
+                    <span class="text-xs font-black text-orange">モニタリングAI</span>
+                </button>
+
+                <!-- Gemini Meeting -->
+                <button onclick="openToolTab('tab-meeting')" class="bg-white p-4 rounded-xl border-2 border-navy/60 shadow-sm hover:border-navy transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-navy-subtle text-navy flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-users text-navy"></i>
+                    </div>
+                    <span class="text-xs font-bold text-navy-dark">担当者会議録AI</span>
+                </button>
+
+                <!-- Gemini Face Sheet / Basic Info -->
+                <button onclick="openToolTab('tab-facesheet')" class="bg-white p-4 rounded-xl border-2 border-slate-300 shadow-sm hover:border-orange transition text-center flex flex-col items-center justify-center space-y-2 group">
+                    <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xl font-black group-hover:scale-110 transition">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <span class="text-xs font-bold text-navy-dark">基本情報AI</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 3: AI 業務ツール統合ワークスペース -->
+        <section id="workspace" class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden">
+            <!-- Workspace Navigation Tabs -->
+            <div class="bg-navy-dark text-white p-2 flex flex-wrap gap-2 border-b-2 border-orange">
+                <button onclick="switchTab('tab-monitoring')" id="nav-tab-monitoring" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-orange text-white shadow">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>モニタリング作成支援</span>
+                </button>
+                <button onclick="switchTab('tab-meeting')" id="nav-tab-meeting" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-navy-light">
+                    <i class="fa-solid fa-users"></i>
+                    <span>サービス担当者会議録</span>
+                </button>
+                <button onclick="switchTab('tab-facesheet')" id="nav-tab-facesheet" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-navy-light">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>通所・病院 基本情報AI</span>
+                </button>
+                <button onclick="switchTab('tab-plan')" id="nav-tab-plan" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-navy-light">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>第2表要約・抽出</span>
+                </button>
+                <button onclick="switchTab('tab-fax')" id="nav-tab-fax" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-300 hover:text-white hover:bg-navy-light">
+                    <i class="fa-solid fa-fax"></i>
+                    <span>FAX送付状印刷</span>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-6">
+                <!-- TAB 1: モニタリング記録作成支援 -->
+                <div id="tab-monitoring" class="tab-content space-y-6">
+                    <div class="bg-orange/10 border-l-4 border-orange p-4 rounded-r-xl">
+                        <h4 class="font-bold text-navy-dark text-base">モニタリング記録 作成支援（カイポケ連動）</h4>
+                        <p class="text-xs text-slate-600 mt-1">
+                            短期目標と聞き取り内容から、カイポケにそのまま貼り付け可能な形式（短期目標ごとの評価・総合評価）で自動作成します。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">利用者名</label>
+                            <input type="text" id="mon-user-name" placeholder="例：山田 花子 様" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">記録日</label>
+                            <input type="date" id="mon-date" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">1. 短期目標・サービス内容</label>
+                            <textarea id="mon-goals" rows="3" placeholder="短期目標①：転倒せず安全に室内移動ができる&#10;短期目標②：週2回デイサービスに参加し活動量を維持する" class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-orange focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">2. 聞き取り内容（訪問時メモ / Keepコピー）</label>
+                            <textarea id="mon-notes" rows="4" placeholder="体調は安定。室内移動は手すりを使用。デイサービスは週2回欠かさず参加しており表情明るい。" class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-orange focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">3. 前回のモニタリング記録（任意）</label>
+                            <textarea id="mon-prev" rows="2" placeholder="前回の記録があれば貼り付けてください（空欄でも可）" class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-orange focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">4. 音声ファイル（任意：録音データ）</label>
+                            <div class="flex items-center gap-3">
+                                <label for="mon-audio" class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-microphone text-orange"></i>
+                                    <span>音声ファイルを選択</span>
+                                </label>
+                                <input type="file" id="mon-audio" accept="audio/*" class="hidden" onchange="handleAudioSelect(this, 'mon-audio-name')">
+                                <span id="mon-audio-name" class="text-xs text-slate-500"></span>
+                            </div>
+                        </div>
+
+                        <button onclick="generateMonitoring()" id="btn-mon-generate" class="w-full bg-orange hover:bg-orange-hover text-white py-3.5 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>AIでモニタリング記録を作成する</span>
+                        </button>
+                    </div>
+
+                    <!-- Output Container -->
+                    <div id="mon-result" class="hidden space-y-4 pt-4 border-t border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <h5 class="font-bold text-navy-dark text-sm">【出力結果】内容を確認・調整してコピー</h5>
+                            <button onclick="copyAllMonitoring()" class="bg-navy hover:bg-navy-dark text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>全体をカイポケ用にコピー</span>
+                            </button>
+                        </div>
+
+                        <div id="mon-goals-output" class="space-y-3"></div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-bold text-navy-dark">総合評価</label>
+                                <button onclick="copyElementText('mon-summary-output')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2.5 py-1 rounded text-xs font-bold transition flex items-center gap-1">
+                                    <i class="fa-solid fa-copy"></i> この項目をコピー
+                                </button>
+                            </div>
+                            <textarea id="mon-summary-output" rows="5" class="w-full p-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange focus:outline-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: サービス担当者会議録 -->
+                <div id="tab-meeting" class="tab-content hidden space-y-6">
+                    <div class="bg-navy/10 border-l-4 border-navy p-4 rounded-r-xl">
+                        <h4 class="font-bold text-navy-dark text-base">サービス担当者会議録 作成支援（第4表形式）</h4>
+                        <p class="text-xs text-slate-600 mt-1">
+                            文字起こしやメモから、第4表フォーマット（検討した項目・検討内容・結論・残された課題）に整理して出力します。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">利用者名</label>
+                            <input type="text" id="mtg-user-name" placeholder="例：山田 花子 様" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">会議日</label>
+                            <input type="date" id="mtg-date" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">短期目標・利用中のサービス</label>
+                            <textarea id="mtg-goals" rows="3" placeholder="短期目標①：転倒せず安全に室内移動ができる&#10;利用中サービス：通所介護（週2回）、訪問介護（週1回）" class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">会議の文字起こし・メモ</label>
+                            <textarea id="mtg-transcript" rows="6" placeholder="会議の文字起こしテキストやメモを貼り付けてください..." class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">音声ファイル（任意：会議の録音）</label>
+                            <div class="flex items-center gap-3">
+                                <label for="mtg-audio" class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-file-audio text-navy"></i>
+                                    <span>音声ファイルを選択</span>
+                                </label>
+                                <input type="file" id="mtg-audio" accept="audio/*" class="hidden" onchange="handleAudioSelect(this, 'mtg-audio-name')">
+                                <span id="mtg-audio-name" class="text-xs text-slate-500"></span>
+                            </div>
+                        </div>
+
+                        <button onclick="generateMeeting()" id="btn-mtg-generate" class="w-full bg-navy hover:bg-navy-dark text-white py-3.5 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-users"></i>
+                            <span>AIで会議録を作成する</span>
+                        </button>
+                    </div>
+
+                    <!-- Output Container -->
+                    <div id="mtg-result" class="hidden space-y-4 pt-4 border-t border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <h5 class="font-bold text-navy-dark text-sm">【会議録 出力結果】</h5>
+                            <button onclick="copyAllMeeting()" class="bg-navy hover:bg-navy-dark text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>全体をコピー</span>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">検討した項目</label>
+                                    <button onclick="copyElementText('mtg-items-out')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">この項目をコピー</button>
+                                </div>
+                                <textarea id="mtg-items-out" rows="5" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">検討内容</label>
+                                    <button onclick="copyElementText('mtg-disc-out')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">この項目をコピー</button>
+                                </div>
+                                <textarea id="mtg-disc-out" rows="5" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">結論</label>
+                                    <button onclick="copyElementText('mtg-conc-out')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">この項目をコピー</button>
+                                </div>
+                                <textarea id="mtg-conc-out" rows="5" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">残された課題</label>
+                                    <button onclick="copyElementText('mtg-iss-out')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">この項目をコピー</button>
+                                </div>
+                                <textarea id="mtg-iss-out" rows="5" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: 通所・病院向け基本情報（フェースシート）AI -->
+                <div id="tab-facesheet" class="tab-content hidden space-y-6">
+                    <div class="bg-navy-subtle border-l-4 border-navy p-4 rounded-r-xl">
+                        <h4 class="font-bold text-navy-dark text-base">通所介護・医療機関向け 基本情報（フェースシート）作成AI</h4>
+                        <p class="text-xs text-slate-600 mt-1">
+                            アセスメントメモや相談内容テキストから、通所介護事業所や病院への連携送付に必要な基本情報・留意事項シートを即座に作成します。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">利用者名</label>
+                            <input type="text" id="fs-user-name" placeholder="例：山田 花子 様" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">連携先区分</label>
+                            <select id="fs-destination" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange focus:outline-none bg-white">
+                                <option value="デイサービス・通所介護">デイサービス・通所介護</option>
+                                <option value="病院・医療連携室（退院・受診連携）">病院・医療連携室（退院・受診連携）</option>
+                                <option value="ショートステイ・短期入所">ショートステイ・短期入所</option>
+                                <option value="訪問看護・リハビリ事業所">訪問看護・リハビリ事業所</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">アセスメント・基本状況メモ（手入力・コピペ）</label>
+                            <textarea id="fs-input-notes" rows="6" placeholder="利用者の状態、家族構成、要介護度、認知症症状、服薬状況、アレルギー、希望するケア等のメモを貼り付けてください..." class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-orange focus:outline-none bg-slate-50/50 leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">音声データ（聞き取り録音）</label>
+                            <div class="flex items-center gap-3">
+                                <label for="fs-audio" class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-file-audio text-navy"></i>
+                                    <span>音声ファイルを選択</span>
+                                </label>
+                                <input type="file" id="fs-audio" accept="audio/*" class="hidden" onchange="handleAudioSelect(this, 'fs-audio-name')">
+                                <span id="fs-audio-name" class="text-xs text-slate-500"></span>
+                            </div>
+                        </div>
+
+                        <button onclick="generateFaceSheet()" id="btn-fs-generate" class="w-full bg-navy hover:bg-navy-dark text-white py-3.5 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-id-card"></i>
+                            <span>AIで基本情報シートを作成する</span>
+                        </button>
+                    </div>
+
+                    <!-- Output Container -->
+                    <div id="fs-result" class="hidden space-y-4 pt-4 border-t border-slate-200">
+                        <div class="flex items-center justify-between">
+                            <h5 class="font-bold text-navy-dark text-sm">【基本情報シート 出力結果】</h5>
+                            <button onclick="copyAllFaceSheet()" class="bg-navy hover:bg-navy-dark text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>全体をコピー</span>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">身体・生活状況の概要</label>
+                                    <button onclick="copyElementText('fs-out-body')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">コピー</button>
+                                </div>
+                                <textarea id="fs-out-body" rows="4" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">認知面・精神状況・家族背景</label>
+                                    <button onclick="copyElementText('fs-out-mind')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">コピー</button>
+                                </div>
+                                <textarea id="fs-out-mind" rows="4" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">医療・服薬・感染症留意事項</label>
+                                    <button onclick="copyElementText('fs-out-medical')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">コピー</button>
+                                </div>
+                                <textarea id="fs-out-medical" rows="4" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-navy-dark">連携先への送信用要約</label>
+                                    <button onclick="copyElementText('fs-out-summary')" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold">コピー</button>
+                                </div>
+                                <textarea id="fs-out-summary" rows="4" class="w-full p-2 text-sm border rounded focus:outline-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: 第2表要約・抽出 -->
+                <div id="tab-plan" class="tab-content hidden space-y-4">
+                    <div class="bg-navy-subtle border-l-4 border-navy p-4 rounded-r-xl">
+                        <h4 class="font-bold text-navy-dark text-base">居宅サービス計画書（第2表）要約抽出</h4>
+                        <p class="text-xs text-slate-600 mt-1">
+                            居宅サービス計画書の第2表全文を貼り付けると、短期目標・サービス内容・頻度を箇条書きで即座に抽出・整理します。
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">第2表テキスト</label>
+                        <textarea id="plan-input" rows="6" placeholder="第2表の内容を貼り付けてください..." class="w-full p-3 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-navy focus:outline-none bg-slate-50/50"></textarea>
+                    </div>
+
+                    <button onclick="extractPlan()" class="w-full bg-navy hover:bg-navy-dark text-white py-3 rounded-xl font-bold shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>要約・要点を抽出する</span>
+                    </button>
+
+                    <div id="plan-result" class="hidden space-y-2 pt-3">
+                        <label class="block text-xs font-bold text-navy-dark">抽出結果</label>
+                        <textarea id="plan-output" rows="6" class="w-full p-3 text-sm border border-slate-300 rounded-xl bg-slate-50"></textarea>
+                        <button onclick="copyElementText('plan-output')" class="bg-orange hover:bg-orange-hover text-white px-4 py-2 rounded-lg text-xs font-bold">結果をコピー</button>
+                    </div>
+                </div>
+
+                <!-- TAB 5: FAX送付状印刷 -->
+                <div id="tab-fax" class="tab-content hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-100 p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <h4 class="font-bold text-navy-dark text-base flex items-center gap-2">
+                                <i class="fa-solid fa-fax text-orange"></i>
+                                <span>A4 FAX送付状ジェネレーター</span>
+                            </h4>
+                            <p class="text-xs text-slate-500">ORANGE LABO 専用の送付状を作成・PDF出力できます</p>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button onclick="fillFaxSample(1)" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg text-xs font-bold transition">
+                                担当者会議案内
+                            </button>
+                            <button onclick="fillFaxSample(2)" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg text-xs font-bold transition">
+                                フェースシート送付
+                            </button>
+                            <button onclick="triggerPrintFax()" class="bg-orange hover:bg-orange-hover text-white px-4 py-1.5 rounded-lg text-xs font-bold shadow transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-print"></i>
+                                <span>印刷 / PDF出力</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div class="lg:col-span-5 space-y-4 text-xs">
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                                <div class="font-bold text-navy-dark">【宛先情報 TO】</div>
+                                <input type="text" id="fax-to-company" placeholder="宛先会社・施設名" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="fax-to-dept" placeholder="部署名" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                    <input type="text" id="fax-to-name" placeholder="担当者氏名" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="fax-to-fax" placeholder="FAX番号" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                    <input type="text" id="fax-to-tel" placeholder="TEL番号" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                                <div class="font-bold text-navy-dark">【発信元情報 FROM】（ORANGE LABO）</div>
+                                <input type="text" id="fax-from-company" value="ORANGE　LABO" oninput="updateFaxPreview()" class="w-full p-2 border rounded bg-white">
+                                <input type="text" id="fax-from-name" placeholder="差出人 担当者名" oninput="updateFaxPreview()" class="w-full p-2 border rounded border-orange">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="fax-from-tel" value="050-8896-2360" oninput="updateFaxPreview()" class="w-full p-2 border rounded bg-white">
+                                    <input type="text" id="fax-from-fax" value="050-8896-2361" oninput="updateFaxPreview()" class="w-full p-2 border rounded bg-white">
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                                <div class="font-bold text-navy-dark">【件名・本文】</div>
+                                <input type="text" id="fax-subject" placeholder="件名" oninput="updateFaxPreview()" class="w-full p-2 border rounded">
+                                <textarea id="fax-message" rows="6" placeholder="本文メッセージ..." oninput="updateFaxPreview()" class="w-full p-2 border rounded"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 overflow-x-auto flex justify-center bg-slate-200 p-4 rounded-xl border border-slate-300">
+                            <div id="fax-paper-preview" class="a4-paper text-slate-900 shadow-xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Corporate Footer with Logo -->
+    <footer class="bg-navy-dark text-white border-t-4 border-orange mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 text-center md:text-left">
+                <!-- Footer Company Name with Logo placed directly before text -->
+                <div class="flex items-center justify-center md:justify-start space-x-3">
+                    <img src="logo.png" alt="ORANGE LABO Logo" class="h-8 w-auto object-contain" onerror="this.style.display='none';">
+                    <span class="font-black text-lg text-white">株式会社 ORANGE LABO</span>
+                </div>
+                <p class="text-xs text-slate-300">
+                    〒904-2142 沖縄県沖縄市登川3丁目31-10 L-STYLE A-2号室<br>
+                    TEL: 050-8896-2360 / FAX: 050-8896-2361
+                </p>
+            </div>
+            <div class="text-xs text-slate-400 text-center md:text-right">
+                <p>© ORANGE LABO Co., Ltd. All Rights Reserved.</p>
+                <p class="text-[10px] text-orange-soft mt-1">CareDX Portal v4.5 - Consolidated Professional Edition</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Overlay -->
+    <div id="toast-bar" class="fixed bottom-5 right-5 bg-navy-dark text-white px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 text-xs sm:text-sm border-l-4 border-orange transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-orange"></i>
+        <span id="toast-text">処理を完了しました</span>
+    </div>
+
+    <!-- JavaScript Application Core -->
+    <script>
+        // Pre-embedded Gemini API key provided by representative
+        const embeddedApiKey = 'AQ.Ab8RN6KDFTENaipRd1CVLie8B2P_8coeHmP-0T2iXUHfyyW04Q';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('mon-date').value = today;
+            document.getElementById('mtg-date').value = today;
+            updateFaxPreview();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-orange', 'text-white', 'shadow');
+                btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-navy-light');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.add('bg-orange', 'text-white', 'shadow');
+                activeNav.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-navy-light');
+            }
+        }
+
+        function openToolTab(tabId) {
+            switchTab(tabId);
+            document.getElementById('workspace').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        let currentAudioBase64 = null;
+        let currentAudioMime = null;
+
+        function handleAudioSelect(input, targetSpanId) {
+            const file = input.files[0];
+            const span = document.getElementById(targetSpanId);
+            if (!file) {
+                span.textContent = '';
+                currentAudioBase64 = null;
+                return;
+            }
+            span.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(1)}MB)`;
+            currentAudioMime = file.type || 'audio/mp3';
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                currentAudioBase64 = reader.result.split(',')[1];
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function callGemini(systemPrompt, userText, audioBase64 = null, audioMime = null, responseSchema = null) {
+            const models = ['gemini-2.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-2.5-flash'];
+            const userParts = [{ text: userText }];
+
+            if (audioBase64) {
+                userParts.push({
+                    inline_data: { mime_type: audioMime || 'audio/mp3', data: audioBase64 }
+                });
+                userParts[0].text += '\n\n※音声ファイルが添付されています。この音声を文字起こしし、分析・記録作成に使用してください。';
+            }
+
+            const genConfig = {
+                temperature: 0.3,
+                maxOutputTokens: 8192,
+                responseMimeType: 'application/json'
+            };
+
+            if (responseSchema) {
+                genConfig.responseSchema = responseSchema;
+            }
+
+            const payload = {
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                contents: [{ role: 'user', parts: userParts }],
+                generationConfig: genConfig
+            };
+
+            for (const model of models) {
+                try {
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${embeddedApiKey}`;
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (text) return JSON.parse(text);
+                    }
+                } catch (e) {
+                    console.warn(`Model ${model} fallback...`, e);
+                }
+            }
+            throw new Error('Gemini AIの呼び出しに失敗しました。時間をおいて再試行してください。');
+        }
+
+        // Monitoring Generator (Strict User Rules Applied)
+        async function generateMonitoring() {
+            const goals = document.getElementById('mon-goals').value.trim();
+            const notes = document.getElementById('mon-notes').value.trim();
+            const prev = document.getElementById('mon-prev').value.trim();
+            const btn = document.getElementById('btn-mon-generate');
+
+            if (!goals && !notes && !currentAudioBase64) {
+                showToast('短期目標、聞き取り内容、または音声ファイルのいずれかを準備してください', 'info');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>AI作成中...</span>`;
+
+            const sysPrompt = `あなたは、優秀なケアマネジャーが「カイポケ」介護ソフトにそのまま貼り付けて使用できるモニタリング記録の作成を最優先目的として支援するアシスタントです。介護保険法や福祉分野の専門知識、「適切なケアマネジメント手法」に基づく基本ケア44項目を踏まえ、身体状況、精神面、日常生活動作、介護サービス利用、家族関係、支援経過などを網羅的に整理してください。ユーザーから提供されたモニタリング記録、質問、短期目標、音声データを正確に反映し、憶測や補完は行わないでください。録音データは文字起こし後、モニタリング時の聞き取り内容として扱い、必ず短期目標と照合した「短期目標ごとの評価」を作成してください。
+
+「短期目標ごとの評価」は端的さを最優先とし、各目標につき原則1～2文、最大でも全角120文字以内を目安とします。記載要素は①実施状況②達成度③支援上の要点のみに絞り、重複表現や背景説明は省きます。事実の列挙に徹し、評価語は簡潔な定型表現を用います。出力順は「短期目標ごとの評価」→「総合評価」とします。
+
+「総合評価」はカイポケ貼り付け最優先とし、改行は最小限に抑えます。原則として一文または意味のまとまり単位で改行し、文中・語中・助詞直後・接続語途中での改行は禁止します。全角91文字×13行程度は目安とし、行数合わせのための不自然な改行は行わないでください。文章はそのまま貼り付けてもレイアウト崩れや読みにくさが生じない体裁とし、実務的で丁寧な日本語で校正してください。個人情報保護と守秘義務を厳守し、ユーザーが示していないサービス利用や事実は記載しないでください。
+
+必ず以下のJSON形式でのみ回答してください：
+{"goals":[{"goal":"短期目標の内容","evaluation":"短期目標ごとの評価（原則1～2文、最大全角120文字以内、①実施状況②達成度③支援上の要点）"}],"summary":"総合評価（カイポケ貼り付け最優先、改行最小限、丁寧な校正文章）"}`;
+
+            let userPrompt = '';
+            if (goals) userPrompt += `【短期目標・サービス内容】\n${goals}\n\n`;
+            if (notes) userPrompt += `【聞き取り内容】\n${notes}\n\n`;
+            if (prev) userPrompt += `【前回のモニタリング記録】\n${prev}\n\n`;
+
+            const schema = {
+                type: "object",
+                properties: {
+                    goals: {
+                        type: "array",
+                        items: {
+                            type: "object",
+                            properties: {
+                                goal: { type: "string" },
+                                evaluation: { type: "string" }
+                            },
+                            required: ["goal", "evaluation"]
+                        }
+                    },
+                    summary: { type: "string" }
+                },
+                required: ["goals", "summary"]
+            };
+
+            try {
+                const res = await callGemini(sysPrompt, userPrompt, currentAudioBase64, currentAudioMime, schema);
+                
+                const goalsContainer = document.getElementById('mon-goals-output');
+                goalsContainer.innerHTML = '';
+
+                (res.goals || []).forEach((g, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2';
+                    div.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <label class="block text-xs font-bold text-navy-dark">短期目標${idx + 1}：${g.goal}</label>
+                            <button onclick="copyGoalEvalText(this)" class="bg-slate-200 hover:bg-slate-300 text-navy-dark px-2 py-0.5 rounded text-[11px] font-bold transition flex items-center gap-1">
+                                <i class="fa-solid fa-copy"></i> この評価をコピー
+                            </button>
+                        </div>
+                        <textarea class="w-full p-2.5 text-sm border border-slate-300 rounded focus:outline-none focus:ring-2 focus:ring-orange">${g.evaluation}</textarea>
+                    `;
+                    goalsContainer.appendChild(div);
+                });
+
+                document.getElementById('mon-summary-output').value = res.summary || '';
+                document.getElementById('mon-result').classList.remove('hidden');
+                showToast('モニタリング記録を作成しました！');
+            } catch (err) {
+                showToast(err.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> <span>AIでモニタリング記録を作成する</span>`;
+            }
+        }
+
+        function copyGoalEvalText(btn) {
+            const textarea = btn.parentElement.nextElementSibling;
+            copyText(textarea.value);
+        }
+
+        // Meeting Minutes Generator (Strict User Rules Applied)
+        async function generateMeeting() {
+            const goals = document.getElementById('mtg-goals').value.trim();
+            const transcript = document.getElementById('mtg-transcript').value.trim();
+            const btn = document.getElementById('btn-mtg-generate');
+
+            if (!transcript && !currentAudioBase64) {
+                showToast('文字起こしまたは音声ファイルを準備してください', 'info');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>AI作成中...</span>`;
+
+            const sysPrompt = `# 役割・ペルソナ
+あなたは、介護保険法（平成9年法律第123号）、厚生労働省の通知・指導指針、および居宅介護支援事業所の運営基準に精通した「優秀な居宅介護支援専門員（ケアマネジャー）」です。利用者本位、自立支援、尊厳保持の観点を常に意識し、介護DXの視点も持って業務を遂行します。
+
+# 目的
+提供される「サービス担当者会議の音声文字起こしデータ（または録音音声）」および「利用者の基本情報・短期目標・利用中サービス」を元に、ケアマネジメントの正式文書として相応しい、簡潔かつ過不足のない「サービス担当者会議録（第4表）」を作成してください。
+
+# 構成・記述ルール
+1. 必ず「検討した項目」「検討内容」「結論」「残された課題」の4つを作成し、各項目1000文字以内で記述してください。
+2. 「検討した項目」の冒頭には「会議開催の趣旨：○○○○○」を明記してください。
+3. 「検討内容」「結論」「残された課題」は「検討した項目」の番号と対応させ、「1. 」「2. 」「3. 」のように半角数字＋半角ピリオド＋半角スペースで明示的に記述してください。全角数字や丸数字（①）は絶対に使用しないでください。
+4. 専門職が読みやすい自然な敬語（丁寧語）文体とし、曖昧な表現（〜のようです等）や口語は一切排除してください。
+5. ノイズのない洗練された要点のみを再構成してください。
+
+必ず以下のJSON形式でのみ回答してください：
+{"items":"検討した項目（冒頭に会議開催の趣旨、半角数字1. 2. ）","discussion":"検討内容（半角数字1. 2. でロジカルに対応）","conclusion":"結論（半角数字1. 2. で各決定事項）","issues":"残された課題（半角数字1. 2. でリスクや次回確認事項）"}`;
+
+            let userPrompt = '';
+            if (goals) userPrompt += `【利用者基本情報・短期目標・利用サービス】\n${goals}\n\n`;
+            userPrompt += `【サービス担当者会議 音声文字起こしデータ】\n${transcript}`;
+
+            const schema = {
+                type: "object",
+                properties: {
+                    items: { type: "string" },
+                    discussion: { type: "string" },
+                    conclusion: { type: "string" },
+                    issues: { type: "string" }
+                },
+                required: ["items", "discussion", "conclusion", "issues"]
+            };
+
+            try {
+                const res = await callGemini(sysPrompt, userPrompt, currentAudioBase64, currentAudioMime, schema);
+                document.getElementById('mtg-items-out').value = res.items || '';
+                document.getElementById('mtg-disc-out').value = res.discussion || '';
+                document.getElementById('mtg-conc-out').value = res.conclusion || '';
+                document.getElementById('mtg-iss-out').value = res.issues || '';
+
+                document.getElementById('mtg-result').classList.remove('hidden');
+                showToast('サービス担当者会議録を作成しました！');
+            } catch (err) {
+                showToast(err.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-users"></i> <span>AIで会議録を作成する</span>`;
+            }
+        }
+
+        // Face Sheet / Basic Information AI Generator
+        async function generateFaceSheet() {
+            const notes = document.getElementById('fs-input-notes').value.trim();
+            const dest = document.getElementById('fs-destination').value;
+            const userName = document.getElementById('fs-user-name').value || '対象者様';
+            const btn = document.getElementById('btn-fs-generate');
+
+            if (!notes && !currentAudioBase64) {
+                showToast('基本情報メモまたは音声ファイルを準備してください', 'info');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>AI作成中...</span>`;
+
+            const sysPrompt = `あなたは居宅介護支援専門員です。通所介護や病院などの【${dest}】へ提供する【基本情報（フェースシート）要約】を作成してください。
+必ず以下のJSON形式でのみ出力してください：
+{"body":"身体・生活状況の概要","mind":"認知面・精神状況・家族背景","medical":"医療・服薬・感染症留意事項","summary":"連携先への送信用要約メッセージ"}`;
+
+            const userPrompt = `利用者名：${userName}\n連携先：${dest}\n\n【アセスメント・基本情報メモ】\n${notes}`;
+
+            const schema = {
+                type: "object",
+                properties: {
+                    body: { type: "string" },
+                    mind: { type: "string" },
+                    medical: { type: "string" },
+                    summary: { type: "string" }
+                },
+                required: ["body", "mind", "medical", "summary"]
+            };
+
+            try {
+                const res = await callGemini(sysPrompt, userPrompt, currentAudioBase64, currentAudioMime, schema);
+                document.getElementById('fs-out-body').value = res.body || '';
+                document.getElementById('fs-out-mind').value = res.mind || '';
+                document.getElementById('fs-out-medical').value = res.medical || '';
+                document.getElementById('fs-out-summary').value = res.summary || '';
+
+                document.getElementById('fs-result').classList.remove('hidden');
+                showToast('基本情報シートを作成しました！');
+            } catch (err) {
+                showToast(err.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-id-card"></i> <span>AIで基本情報シートを作成する</span>`;
+            }
+        }
+
+        // Plan Extraction Generator
+        async function extractPlan() {
+            const text = document.getElementById('plan-input').value.trim();
+            if (!text) return;
+
+            const sysPrompt = `第2表テキストから短期目標・サービス・頻度を箇条書きで抽出してください。JSON形式：{"summary":"抽出結果"}`;
+            try {
+                const res = await callGemini(sysPrompt, text);
+                document.getElementById('plan-output').value = res.summary || '';
+                document.getElementById('plan-result').classList.remove('hidden');
+                showToast('要約抽出が完了しました');
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        // FAX Preview Renderer
+        function updateFaxPreview() {
+            const company = document.getElementById('fax-to-company').value || '〇〇デイサービス';
+            const dept = document.getElementById('fax-to-dept').value || '相談室';
+            const name = document.getElementById('fax-to-name').value || '担当者';
+            const fax = document.getElementById('fax-to-fax').value || '000-000-0000';
+            const tel = document.getElementById('fax-to-tel').value || '000-000-0000';
+
+            const fromCompany = document.getElementById('fax-from-company').value || 'ORANGE　LABO';
+            const fromName = document.getElementById('fax-from-name').value || '担当 ケアマネジャー';
+            const fromTel = document.getElementById('fax-from-tel').value || '050-8896-2360';
+            const fromFax = document.getElementById('fax-from-fax').value || '050-8896-2361';
+
+            const subject = document.getElementById('fax-subject').value || 'サービス担当者会議のご案内';
+            const msg = document.getElementById('fax-message').value || '平素より大変お世話になっております。\n下記資料を送付いたしますので、ご査収のほどよろしくお願いいたします。';
+
+            const html = `
+                <div class="border-b-4 border-orange pb-3 mb-6 text-center">
+                    <h1 class="text-3xl font-black tracking-widest text-slate-900">F A X 送 付 状</h1>
+                </div>
+
+                <div class="flex justify-between text-xs text-slate-600 mb-6 font-bold">
+                    <span>送信日: ${new Date().toLocaleDateString('ja-JP')}</span>
+                    <span>送信枚数: 本紙含め 1 枚</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div class="border border-slate-300 p-4 bg-white space-y-1">
+                        <p class="text-[10px] text-slate-400 font-bold">【送信先 TO】</p>
+                        <p class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-1">${company}</p>
+                        <p class="text-xs text-slate-600">${dept}</p>
+                        <p class="text-base font-bold text-slate-800">${name} 様</p>
+                        <p class="text-xs text-slate-500 pt-2">FAX: ${fax} / TEL: ${tel}</p>
+                    </div>
+
+                    <div class="border-2 border-orange p-4 bg-orange-50/30 space-y-1">
+                        <p class="text-[10px] text-orange font-bold">【発信元 FROM】</p>
+                        <p class="text-lg font-black text-slate-900">${fromCompany}</p>
+                        <p class="text-xs font-bold text-slate-700">${fromName}</p>
+                        <p class="text-xs text-slate-500">〒904-2142 沖縄県沖縄市登川3丁目31-10 L-STYLE A-2号室</p>
+                        <p class="text-xs text-slate-700 pt-1 font-bold">TEL: ${fromTel} / FAX: ${fromFax}</p>
+                    </div>
+                </div>
+
+                <div class="border-2 border-navy p-3 mb-6 bg-slate-50">
+                    <p class="text-[10px] font-bold text-orange mb-0.5">【件名】</p>
+                    <p class="text-base font-bold text-slate-900">${subject}</p>
+                </div>
+
+                <div class="border border-slate-200 p-4 min-h-[300px] text-sm leading-relaxed whitespace-pre-wrap text-slate-900">
+${msg}
+                </div>
+            `;
+
+            document.getElementById('fax-paper-preview').innerHTML = html;
+        }
+
+        function fillFaxSample(type) {
+            if (type === 1) {
+                document.getElementById('fax-to-company').value = 'デイサービスあおぞら';
+                document.getElementById('fax-to-dept').value = '相談室';
+                document.getElementById('fax-to-name').value = '佐藤 花子';
+                document.getElementById('fax-subject').value = 'サービス担当者会議のご案内および照会書送付';
+                document.getElementById('fax-message').value = `拝啓\n\n平素より大変お世話になっております。ORANGE LABOです。\n\n更新に伴い、サービス担当者会議のご案内ならびにケアプラン原案を送付いたします。\n別紙「照会書」にご意見をご記入の上、ご返信くださいますようお願い申し上げます。`;
+            } else {
+                document.getElementById('fax-to-company').value = '〇〇総合病院';
+                document.getElementById('fax-to-dept').value = '地域医療連携室';
+                document.getElementById('fax-to-name').value = '高橋 MSW';
+                document.getElementById('fax-subject').value = '新規ご利用者様 基本情報（フェースシート）送付の件';
+                document.getElementById('fax-message').value = `拝啓\n\n平素より大変お世話になっております。\n対象者様の基本情報およびアセスメントシートを送付いたします。ご査収のほどよろしくお願いいたします。`;
+            }
+            updateFaxPreview();
+            showToast('サンプル情報を読み込みました');
+        }
+
+        function triggerPrintFax() {
+            const content = document.getElementById('fax-paper-preview').innerHTML;
+            const printWin = window.open('', '_blank');
+            if (!printWin) {
+                showToast('ポップアップがブロックされました', 'error');
+                return;
+            }
+
+            printWin.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>FAX送付状印刷</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                    <style>
+                        body { padding: 12mm 15mm; background: white; font-family: 'Noto Sans JP', sans-serif; }
+                        @page { size: A4 portrait; margin: 0; }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                    <script>
+                        window.onload = function() { setTimeout(() => window.print(), 500); }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWin.document.close();
+        }
+
+        function copyAllMonitoring() {
+            const name = document.getElementById('mon-user-name').value || '未入力';
+            const date = document.getElementById('mon-date').value || '未入力';
+            let txt = `【モニタリング記録】\n利用者名：${name}\n記録日：${date}\n\n■短期目標ごとの評価\n`;
+
+            document.querySelectorAll('#mon-goals-output div').forEach(el => {
+                const label = el.querySelector('label') ? el.querySelector('label').textContent : '';
+                const val = el.querySelector('textarea') ? el.querySelector('textarea').value : '';
+                txt += `${label}\n${val}\n\n`;
+            });
+
+            txt += `■総合評価\n${document.getElementById('mon-summary-output').value}`;
+            copyText(txt);
+        }
+
+        function copyAllMeeting() {
+            const name = document.getElementById('mtg-user-name').value || '未入力';
+            const date = document.getElementById('mtg-date').value || '未入力';
+            let txt = `【サービス担当者会議録】\n利用者名：${name}\n会議日：${date}\n\n`;
+            txt += `## 検討した項目\n${document.getElementById('mtg-items-out').value}\n\n`;
+            txt += `## 検討内容\n${document.getElementById('mtg-disc-out').value}\n\n`;
+            txt += `## 結論\n${document.getElementById('mtg-conc-out').value}\n\n`;
+            txt += `## 残された課題\n${document.getElementById('mtg-iss-out').value}\n`;
+            copyText(txt);
+        }
+
+        function copyAllFaceSheet() {
+            const name = document.getElementById('fs-user-name').value || '未入力';
+            const dest = document.getElementById('fs-destination').value || '未選択';
+            let txt = `【基本情報シート（${dest}宛）】\n利用者名：${name}\n\n`;
+            txt += `■身体・生活状況の概要\n${document.getElementById('fs-out-body').value}\n\n`;
+            txt += `■認知面・精神状況・家族背景\n${document.getElementById('fs-out-mind').value}\n\n`;
+            txt += `■医療・服薬・感染症留意事項\n${document.getElementById('fs-out-medical').value}\n\n`;
+            txt += `■送信用要約\n${document.getElementById('fs-out-summary').value}\n`;
+            copyText(txt);
+        }
+
+        function copyElementText(id) {
+            copyText(document.getElementById(id).value);
+        }
+
+        function copyText(str) {
+            const ta = document.createElement('textarea');
+            ta.value = str;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('クリップボードにコピーしました！');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast-bar');
+            const icon = document.getElementById('toast-icon');
+            const text = document.getElementById('toast-text');
+
+            text.textContent = message;
+            if (type === 'error') {
+                icon.className = 'fa-solid fa-circle-exclamation text-red-400';
+            } else if (type === 'info') {
+                icon.className = 'fa-solid fa-circle-info text-orange';
+            } else {
+                icon.className = 'fa-solid fa-circle-check text-orange';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
