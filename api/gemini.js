@@ -16,29 +16,41 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'promptTextが必要です' });
     }
 
-    try {
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: promptText }] }]
-            })
-        });
+    // Try candidate models in order in case one has been retired/renamed by Google.
+    const candidateModels = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    let lastError = 'Gemini API呼び出しエラーが発生しました';
 
-        const data = await response.json();
+    for (const model of candidateModels) {
+        try {
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: promptText }] }]
+                })
+            });
 
-        if (!response.ok) {
-            return res.status(response.status).json({ error: data.error?.message || 'Gemini API呼び出しエラーが発生しました' });
+            const data = await response.json();
+
+            if (!response.ok) {
+                lastError = data.error?.message || lastError;
+                // Model not found/unsupported — try the next candidate.
+                if (response.status === 404) continue;
+                return res.status(response.status).json({ error: lastError });
+            }
+
+            const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (!text) {
+                lastError = 'Gemini APIから有効な応答が得られませんでした';
+                continue;
+            }
+
+            return res.status(200).json({ text });
+        } catch (err) {
+            lastError = err.message || lastError;
         }
-
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!text) {
-            return res.status(502).json({ error: 'Gemini APIから有効な応答が得られませんでした' });
-        }
-
-        return res.status(200).json({ text });
-    } catch (err) {
-        return res.status(500).json({ error: err.message || 'サーバー内部エラーが発生しました' });
     }
+
+    return res.status(502).json({ error: lastError });
 }
